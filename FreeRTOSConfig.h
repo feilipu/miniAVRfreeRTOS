@@ -87,7 +87,7 @@
 #define configQUEUE_REGISTRY_SIZE       0
 #define configUSE_TIME_SLICING          1
 #define configUSE_NEWLIB_REENTRANT      0
-#define configCHECK_FOR_STACK_OVERFLOW  0
+#define configCHECK_FOR_STACK_OVERFLOW  1
 #define configUSE_MALLOC_FAILED_HOOK	1
 #define configMAX_PRIORITIES		    ( ( UBaseType_t ) 4 )
 #define configMINIMAL_STACK_SIZE	    ( ( UBaseType_t ) 85 )
