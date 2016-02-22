@@ -127,7 +127,7 @@ typedef unsigned char	UBaseType_t;
 
 
 #define portDISABLE_INTERRUPTS()	__asm__ __volatile__ ( "cli" ::: "memory")
-#define portENABLE_INTERRUPTS()		__asm__ __volatile__ ( "sei" ::: "memory")
+#define portENABLE_INTERRUPTS() 	__asm__ __volatile__ ( "sei" ::: "memory")
 
 	/*-----------------------------------------------------------*/
 	/**
