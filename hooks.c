@@ -216,7 +216,7 @@ void vApplicationMallocFailedHook( void )
 
 #if defined( configCHECK_FOR_STACK_OVERFLOW )
 
-void vApplicationStackOverflowHook( TaskHandle_t xTask, portCHAR *pcTaskName ) __attribute__((weak));
+void vApplicationStackOverflowHook( TaskHandle_t xTask  __attribute__((unused)), portCHAR *pcTaskName  __attribute__((unused)) ) __attribute__((weak));
 
 void vApplicationStackOverflowHook( TaskHandle_t xTask, portCHAR *pcTaskName )
 {
