@@ -70,6 +70,7 @@
 
 #include <stdlib.h>
 #include <avr/interrupt.h>
+#include <avr/sleep.h>
 #include <avr/wdt.h>
 
 #include "FreeRTOS.h"
