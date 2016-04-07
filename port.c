@@ -515,6 +515,8 @@ void vPortYieldFromTick( void ) __attribute__ ( ( hot, flatten, naked ) );
 void vPortYieldFromTick( void )
 {
 	portSAVE_CONTEXT();
+	
+	sleep_reset();		//	 reset the sleep_mode() faster than sleep_disable();
 
 	if( xTaskIncrementTick() != pdFALSE )
 	{
