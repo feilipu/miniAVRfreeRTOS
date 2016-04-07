@@ -139,8 +139,7 @@ void vApplicationIdleHook( void )
 	portEXIT_CRITICAL();
 	sleep_cpu();		// good night.
 
-	// Uhh. I was woken up, so now disable sleep_mode.
-	sleep_disable();
+	sleep_reset();		// reset the sleep_mode() faster than sleep_disable();
 }
 
 #endif /* configUSE_IDLE_HOOK == 1 */
