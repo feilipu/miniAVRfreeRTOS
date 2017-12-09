@@ -63,7 +63,7 @@ void vApplicationIdleHook( void )
 #elif defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega16U4__) // assume we're using an Arduino Leonardo with 32u4
 	DIDR0 = 0xF3;
 	DIDR2 = 0x3F;
-	
+
 #endif
 
 	// Analogue Comparator Disable
@@ -74,7 +74,6 @@ void vApplicationIdleHook( void )
 	// Otherwise an interrupt can occur when the ACD bit is changed.
 	ACSR &= ~_BV(ACIE);
 	ACSR |=  _BV(ACD);
-
 
 	// There are several macros provided in this header file to actually put the device into sleep mode.
 	// The simplest way is to optionally set the desired sleep mode using set_sleep_mode()
