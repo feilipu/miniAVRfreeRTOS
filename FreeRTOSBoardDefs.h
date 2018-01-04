@@ -52,7 +52,7 @@ extern "C" {
 #endif
 
 // System Tick - Scheduler timer
-// Prefer to use the Watchdog timer, and choose the rate at which scheduler interrupts will occur.
+// Use the Watchdog timer, and choose the rate at which scheduler interrupts will occur.
 
 #define portUSE_WDTO		WDTO_15MS	// portUSE_WDTO to use the Watchdog Timer for xTaskIncrementTick
 
