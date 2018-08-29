@@ -3,15 +3,15 @@
 AVR ATmega port of freeRTOS
 A port of freeRTOS configured to use the Watchdog Timer on AVR ATmega devices and will operate with almost any classic Arduino device from Arduino, SeeedStudio, Sparkfun, Freetronics or Pololu.
 
-The [Goldilocks Analogue story of adding a dual channel DAC to a 1284p classic Arduino board is told here](http://feilipu.me/?s=Goldilocks+Analogue).
+The [Goldilocks Analogue story of adding a dual channel DAC to a 1284p classic Arduino board is told here](https://feilipu.me/?s=Goldilocks+Analogue).
 The [Goldilocks Analogue - Kickstarter Campaign](https://www.kickstarter.com/projects/feilipu/goldilocks-analogue-classic-arduino-audio-superpow/) was successfully funded. 
 It was also a Hackaday Prize 2015 Quarter Finalist.
 
 ![Goldilocks Analogue](https://a.fsdn.com/con/app/proj/avrfreertos/screenshots/Title%20Image.JPG "Goldilocks Analogue")
 
-The first [Goldilocks 1284p story is here](http://feilipu.me/2013/03/08/goldilocks-1284p-arduino-uno-clone/).
-Ths idea was launched as a [Pozible campaign in 2013](http://www.pozible.com/goldilocks/).
-It was successfully funded and the [Goldilocks](http://freetronics.com/goldilocks/) was developed and supported by Freetronics. 
+The first [Goldilocks 1284p story is here](https://feilipu.me/2013/03/08/goldilocks-1284p-arduino-uno-clone/).
+Ths idea was launched as a [Pozible campaign in 2013](https://www.pozible.com/goldilocks/).
+It was successfully funded and the [Goldilocks](https://freetronics.com/goldilocks/) was developed and supported by Freetronics. 
 
 The main repo has been hosted on [Sourceforge avrfreertos](https://sourceforge.net/projects/avrfreertos/) since 2011, and has been [downloaded over 25,000 times](https://sourceforge.net/projects/avrfreertos/files/stats/timeline?dates=2011-09-22+to+2017-11-30).
 Going forward Sourceforge will be updated less often and only with major releases.
@@ -20,8 +20,8 @@ Please [follow @_feilipu](https://twitter.com/_feilipu) on Twitter.
 
 # Getting Started
 
-To get started, follow the instructions on [freeRTOS & libraries for AVR ATmega](http://feilipu.me/freertos-and-libraries-for-avr-atmega).
-Then do some further reading on the [freeRTOS Quick Start Guide](http://www.freertos.org/FreeRTOS-quick-start-guide.html).
+To get started, follow the instructions on [freeRTOS & libraries for AVR ATmega](https://feilipu.me/freertos-and-libraries-for-avr-atmega).
+Then do some further reading on the [freeRTOS Quick Start Guide](https://www.freertos.org/FreeRTOS-quick-start-guide.html).
 
 For the Arduino platform there is a [freeRTOS Library](https://github.com/feilipu/Arduino_FreeRTOS_Library)
 available in the Arduino IDE Library manager, or by directly downloading the ZIP file and importing it into your Arduino IDE.
@@ -46,7 +46,7 @@ Watchdog period options:
 * WDTO_250MS
 * WDTO_500MS
 
-There are [multiple options for configuring the heap in freeRTOS](http://www.freertos.org/a00111.html). Please read the freeRTOS descriptions for the appropriate solution relevant to the application.
+There are [multiple options for configuring the heap in freeRTOS](https://www.freertos.org/a00111.html). Please read the freeRTOS descriptions for the appropriate solution relevant to the application.
 Heap 3 has been implemented for this repository.
 
 # Compatibility
@@ -70,7 +70,7 @@ Heap 3 has been implemented for this repository.
 
 # Further Reading
 
-The canonical source for information is the [FreeRTOS Web Site](http://www.freertos.org/).
-Within this site, the [Getting Started](http://www.freertos.org/FreeRTOS-quick-start-guide.html) page is very useful.
+The canonical source for information is the [FreeRTOS Web Site](https://www.freertos.org/).
+Within this site, the [Getting Started](https://www.freertos.org/FreeRTOS-quick-start-guide.html) page is very useful.
 It is worth having a view from another user, and [manicbug](https://maniacbug.wordpress.com/2012/01/31/freertos/) has some interesting examples.
 This AVRfreeRTOS Repository has plenty of examples, ranging from [Blink](https://github.com/feilipu/avrfreertos/blob/master/MegaBlink/main.c) through to a [Synthesiser](https://github.com/feilipu/avrfreertos/tree/master/GA_Synth) for the Goldilocks Analogue.
