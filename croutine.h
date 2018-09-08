@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Kernel V10.1.0
+ * FreeRTOS Kernel V10.1.1
  * Copyright (C) 2018 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,8 +28,8 @@
 #ifndef CO_ROUTINE_H
 #define CO_ROUTINE_H
 
-#ifndef INC_ARDUINO_FREERTOS_H
-	#error "include Arduino_FreeRTOS.h must appear in source files before include croutine.h"
+#ifndef INC_FREERTOS_H
+    #error "include FreeRTOS.h must appear in source files before include croutine.h"
 #endif
 
 #include "list.h"

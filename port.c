@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Kernel V10.1.0
+ * FreeRTOS Kernel V10.1.1
  * Copyright (C) 2018 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -422,8 +422,6 @@ uint16_t usAddress;
 	pxTopOfStack--;
 	*pxTopOfStack = ( StackType_t ) 0x031;	/* R31 */
 	pxTopOfStack--;
-
-	/*lint +e950 +e611 +e923 */
 
 	return pxTopOfStack;
 }

@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Kernel V10.1.0
+ * FreeRTOS Kernel V10.1.1
  * Copyright (C) 2018 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -44,44 +44,38 @@ specific constants has been moved into the deprecated_definitions.h header
 file. */
 //#include "deprecated_definitions.h"
 
-/* If portENTER_CRITICAL is not defined then including deprecated_definitions.h
-did not result in a portmacro.h header file being included - and it should be
-included here.  In this case the path to the correct portmacro.h header file
-must be set in the compiler's include path. */
-#ifndef portENTER_CRITICAL
-	#include "portmacro.h"
-#endif
+#include "portmacro.h"
 
 #if portBYTE_ALIGNMENT == 32
-	#define portBYTE_ALIGNMENT_MASK ( 0x001f )
+    #define portBYTE_ALIGNMENT_MASK ( 0x001f )
 #endif
 
 #if portBYTE_ALIGNMENT == 16
-	#define portBYTE_ALIGNMENT_MASK ( 0x000f )
+    #define portBYTE_ALIGNMENT_MASK ( 0x000f )
 #endif
 
 #if portBYTE_ALIGNMENT == 8
-	#define portBYTE_ALIGNMENT_MASK ( 0x0007 )
+    #define portBYTE_ALIGNMENT_MASK ( 0x0007 )
 #endif
 
 #if portBYTE_ALIGNMENT == 4
-	#define portBYTE_ALIGNMENT_MASK	( 0x0003 )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x0003 )
 #endif
 
 #if portBYTE_ALIGNMENT == 2
-	#define portBYTE_ALIGNMENT_MASK	( 0x0001 )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x0001 )
 #endif
 
 #if portBYTE_ALIGNMENT == 1
-	#define portBYTE_ALIGNMENT_MASK	( 0x0000 )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x0000 )
 #endif
 
 #ifndef portBYTE_ALIGNMENT_MASK
-	#error "Invalid portBYTE_ALIGNMENT definition"
+    #error "Invalid portBYTE_ALIGNMENT definition"
 #endif
 
 #ifndef portNUM_CONFIGURABLE_REGIONS
-	#define portNUM_CONFIGURABLE_REGIONS 1
+    #define portNUM_CONFIGURABLE_REGIONS 1
 #endif
 
 #ifdef __cplusplus
@@ -222,16 +216,16 @@ void wdt_interrupt_reset_enable (const uint8_t value)
  *
  */
 #if( portUSING_MPU_WRAPPERS == 1 )
-	StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters, BaseType_t xRunPrivileged ) PRIVILEGED_FUNCTION;
+    StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters, BaseType_t xRunPrivileged ) PRIVILEGED_FUNCTION;
 #else
-	StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters ) PRIVILEGED_FUNCTION;
+    StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters ) PRIVILEGED_FUNCTION;
 #endif
 
 /* Used by heap_5.c. */
 typedef struct HeapRegion
 {
-	uint8_t *pucStartAddress;
-	size_t xSizeInBytes;
+    uint8_t *pucStartAddress;
+    size_t xSizeInBytes;
 } HeapRegion_t;
 
 /*
@@ -278,8 +272,8 @@ void vPortEndScheduler( void ) PRIVILEGED_FUNCTION;
  * contained in xRegions.
  */
 #if( portUSING_MPU_WRAPPERS == 1 )
-	struct xMEMORY_REGION;
-	void vPortStoreTaskMPUSettings( xMPU_SETTINGS *xMPUSettings, const struct xMEMORY_REGION * const xRegions, StackType_t *pxBottomOfStack, configSTACK_DEPTH_TYPE ulStackDepth ) PRIVILEGED_FUNCTION;
+    struct xMEMORY_REGION;
+    void vPortStoreTaskMPUSettings( xMPU_SETTINGS *xMPUSettings, const struct xMEMORY_REGION * const xRegions, StackType_t *pxBottomOfStack, configSTACK_DEPTH_TYPE ulStackDepth ) PRIVILEGED_FUNCTION;
 #endif
 
 #ifdef __cplusplus
