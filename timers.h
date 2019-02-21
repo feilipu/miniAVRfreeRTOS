@@ -29,8 +29,8 @@
 #ifndef TIMERS_H
 #define TIMERS_H
 
-#ifndef INC_ARDUINO_FREERTOS_H
-    #error "include Arduino_FreeRTOS.h must appear in source files before include timers.h"
+#ifndef INC_FREERTOS_H
+    #error "include FreeRTOS.h must appear in source files before include timers.h"
 #endif
 
 /*lint -save -e537 This headers are only multiply included if the application code
