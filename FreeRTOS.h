@@ -1089,23 +1089,23 @@ typedef struct xSTATIC_TCB
 {
     void                *pxDummy1;
     #if ( portUSING_MPU_WRAPPERS == 1 )
-        xMPU_SETTINGS    xDummy2;
+        xMPU_SETTINGS   xDummy2;
     #endif
     StaticListItem_t    xDummy3[ 2 ];
-    UBaseType_t            uxDummy5;
+    UBaseType_t         uxDummy5;
     void                *pxDummy6;
-    uint8_t                ucDummy7[ configMAX_TASK_NAME_LEN ];
+    uint8_t             ucDummy7[ configMAX_TASK_NAME_LEN ];
     #if ( ( portSTACK_GROWTH > 0 ) || ( configRECORD_STACK_HIGH_ADDRESS == 1 ) )
         void            *pxDummy8;
     #endif
     #if ( portCRITICAL_NESTING_IN_TCB == 1 )
-        UBaseType_t        uxDummy9;
+        UBaseType_t     uxDummy9;
     #endif
     #if ( configUSE_TRACE_FACILITY == 1 )
-        UBaseType_t        uxDummy10[ 2 ];
+        UBaseType_t     uxDummy10[ 2 ];
     #endif
     #if ( configUSE_MUTEXES == 1 )
-        UBaseType_t        uxDummy12[ 2 ];
+        UBaseType_t     uxDummy12[ 2 ];
     #endif
     #if ( configUSE_APPLICATION_TASK_TAG == 1 )
         void            *pxDummy14;
@@ -1120,11 +1120,11 @@ typedef struct xSTATIC_TCB
         struct    _reent    xDummy17;
     #endif
     #if ( configUSE_TASK_NOTIFICATIONS == 1 )
-        uint32_t         ulDummy18;
+        uint32_t        ulDummy18;
         uint8_t         ucDummy19;
     #endif
     #if ( tskSTATIC_AND_DYNAMIC_ALLOCATION_POSSIBLE != 0 )
-        uint8_t            uxDummy20;
+        uint8_t         uxDummy20;
     #endif
 
     #if( INCLUDE_xTaskAbortDelay == 1 )
@@ -1151,29 +1151,29 @@ typedef struct xSTATIC_TCB
  */
 typedef struct xSTATIC_QUEUE
 {
-    void *pvDummy1[ 3 ];
+    void                *pvDummy1[ 3 ];
 
     union
     {
-        void *pvDummy2;
-        UBaseType_t uxDummy2;
+        void            *pvDummy2;
+        UBaseType_t     uxDummy2;
     } u;
 
-    StaticList_t xDummy3[ 2 ];
-    UBaseType_t uxDummy4[ 3 ];
-    uint8_t ucDummy5[ 2 ];
+    StaticList_t        xDummy3[ 2 ];
+    UBaseType_t         uxDummy4[ 3 ];
+    uint8_t             ucDummy5[ 2 ];
 
     #if( ( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 ) )
-        uint8_t ucDummy6;
+        uint8_t         ucDummy6;
     #endif
 
     #if ( configUSE_QUEUE_SETS == 1 )
-        void *pvDummy7;
+        void            *pvDummy7;
     #endif
 
     #if ( configUSE_TRACE_FACILITY == 1 )
-        UBaseType_t uxDummy8;
-        uint8_t ucDummy9;
+        UBaseType_t     uxDummy8;
+        uint8_t         ucDummy9;
     #endif
 
 } StaticQueue_t;
@@ -1195,15 +1195,15 @@ typedef StaticQueue_t StaticSemaphore_t;
  */
 typedef struct xSTATIC_EVENT_GROUP
 {
-    TickType_t xDummy1;
-    StaticList_t xDummy2;
+    TickType_t          xDummy1;
+    StaticList_t        xDummy2;
 
     #if( configUSE_TRACE_FACILITY == 1 )
-        UBaseType_t uxDummy3;
+        UBaseType_t     uxDummy3;
     #endif
 
     #if( ( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 ) )
-            uint8_t ucDummy4;
+            uint8_t     ucDummy4;
     #endif
 
 } StaticEventGroup_t;
@@ -1252,11 +1252,11 @@ typedef struct xSTATIC_TIMER
 */
 typedef struct xSTATIC_STREAM_BUFFER
 {
-    size_t uxDummy1[ 4 ];
-    void * pvDummy2[ 3 ];
-    uint8_t ucDummy3;
+    size_t              uxDummy1[ 4 ];
+    void                *pvDummy2[ 3 ];
+    uint8_t             ucDummy3;
     #if ( configUSE_TRACE_FACILITY == 1 )
-        UBaseType_t uxDummy4;
+        UBaseType_t     uxDummy4;
     #endif
 } StaticStreamBuffer_t;
 

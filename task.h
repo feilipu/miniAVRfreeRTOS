@@ -1411,7 +1411,7 @@ TaskHandle_t xTaskGetHandle( const char *pcNameToQuery ) PRIVILEGED_FUNCTION; /*
 
 /**
  * task.h
- * <PRE>UBaseType_t uxTaskGetStackHighWaterMark( TaskHandle_t xTask );</PRE>
+ * <PRE>configSTACK_DEPTH_TYPE uxTaskGetStackHighWaterMark( TaskHandle_t xTask );</PRE>
  *
  * INCLUDE_uxTaskGetStackHighWaterMark must be set to 1 in FreeRTOSConfig.h for
  * this function to be available.

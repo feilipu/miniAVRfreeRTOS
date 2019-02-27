@@ -65,9 +65,9 @@ defining trmTIMER_SERVICE_TASK_NAME in FreeRTOSConfig.h. */
 #endif
 
 /* Bit definitions used in the ucStatus member of a timer structure. */
-#define tmrSTATUS_IS_ACTIVE                    ( ( uint8_t ) 0x01 )
-#define tmrSTATUS_IS_STATICALLY_ALLOCATED    ( ( uint8_t ) 0x02 )
-#define tmrSTATUS_IS_AUTORELOAD                ( ( uint8_t ) 0x04 )
+#define tmrSTATUS_IS_ACTIVE                     ( ( uint8_t ) 0x01 )
+#define tmrSTATUS_IS_STATICALLY_ALLOCATED       ( ( uint8_t ) 0x02 )
+#define tmrSTATUS_IS_AUTORELOAD                 ( ( uint8_t ) 0x04 )
 
 /* The definition of the timers themselves. */
 typedef struct TimerDef_t
@@ -80,7 +80,7 @@ typedef struct TimerDef_t
     #if( configUSE_TRACE_FACILITY == 1 )
         UBaseType_t         uxTimerNumber;          /*<< An ID assigned by trace tools such as FreeRTOS+Trace */
     #endif
-    uint8_t                 ucStatus;            /*<< Holds bits to say if the timer was statically allocated or not, and if it is active or not. */
+    uint8_t                 ucStatus;               /*<< Holds bits to say if the timer was statically allocated or not, and if it is active or not. */
 } xTIMER;
 
 /* The old xTIMER name is maintained above then typedefed to the new Timer_t
@@ -94,23 +94,23 @@ two message types are defined in two separate structures, xTimerParametersType
 and xCallbackParametersType respectively. */
 typedef struct tmrTimerParameters
 {
-    TickType_t            xMessageValue;        /*<< An optional value used by a subset of commands, for example, when changing the period of a timer. */
-    Timer_t *            pxTimer;            /*<< The timer to which the command will be applied. */
+    TickType_t              xMessageValue;          /*<< An optional value used by a subset of commands, for example, when changing the period of a timer. */
+    Timer_t *               pxTimer;                /*<< The timer to which the command will be applied. */
 } TimerParameter_t;
 
 
 typedef struct tmrCallbackParameters
 {
-    PendedFunction_t    pxCallbackFunction;    /* << The callback function to execute. */
-    void *pvParameter1;                        /* << The value that will be used as the callback functions first parameter. */
-    uint32_t ulParameter2;                    /* << The value that will be used as the callback functions second parameter. */
+    PendedFunction_t        pxCallbackFunction;     /* << The callback function to execute. */
+    void *pvParameter1;                             /* << The value that will be used as the callback functions first parameter. */
+    uint32_t ulParameter2;                          /* << The value that will be used as the callback functions second parameter. */
 } CallbackParameters_t;
 
 /* The structure that contains the two message types, along with an identifier
 that is used to determine which message type is valid. */
 typedef struct tmrTimerQueueMessage
 {
-    BaseType_t            xMessageID;            /*<< The command being sent to the timer service task. */
+    BaseType_t              xMessageID;             /*<< The command being sent to the timer service task. */
     union
     {
         TimerParameter_t xTimerParameters;
