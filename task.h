@@ -51,7 +51,7 @@ extern "C" {
 /* MPU region parameters passed in ulParameters
  * of MemoryRegion_t struct. */
 #define tskMPU_REGION_READ_ONLY            ( 1UL << 0UL )
-#define tskMPU_REGION_READ_WRITE        ( 1UL << 1UL )
+#define tskMPU_REGION_READ_WRITE           ( 1UL << 1UL )
 #define tskMPU_REGION_EXECUTE_NEVER        ( 1UL << 2UL )
 #define tskMPU_REGION_NORMAL_MEMORY        ( 1UL << 3UL )
 #define tskMPU_REGION_DEVICE_MEMORY        ( 1UL << 4UL )
