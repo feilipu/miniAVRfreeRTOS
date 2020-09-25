@@ -18,7 +18,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * 1 tab == 4 spaces!
  *
  * This file is NOT part of the FreeRTOS distribution.
  *
@@ -106,7 +105,7 @@ void vApplicationIdleHook( void )
 /*-----------------------------------------------------------*/
 
 
-#if defined( configUSE_MALLOC_FAILED_HOOK)
+#if ( configUSE_MALLOC_FAILED_HOOK == 1 )
 
 void vApplicationMallocFailedHook( void ) __attribute__((weak));
 
@@ -173,9 +172,11 @@ void vApplicationMallocFailedHook( void )
 
 #if ( configCHECK_FOR_STACK_OVERFLOW >= 1 )
 
-void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName ) __attribute__((weak));
+void vApplicationStackOverflowHook( TaskHandle_t xTask,
+                                    char * pcTaskName ) __attribute__((weak));
 
-void vApplicationStackOverflowHook( TaskHandle_t xTask __attribute__((unused)), char *pcTaskName __attribute__((unused)) )
+void vApplicationStackOverflowHook( TaskHandle_t xTask __attribute__((unused)),
+                                    char * pcTaskName __attribute__((unused)) )
 {
     /*---------------------------------------------------------------------------*\
     Usage:
@@ -232,18 +233,88 @@ void vApplicationStackOverflowHook( TaskHandle_t xTask __attribute__((unused)), 
     }
 }
 
+#else
+
+void vApplicationStackOverflowHook( TaskHandle_t xTask,
+                                    char * pcTaskName ) __attribute__((weak));
+
+void vApplicationStackOverflowHook( TaskHandle_t xTask,
+                                    char * pcTaskName )
+{
+    /*---------------------------------------------------------------------------*\
+    Usage:
+       called by task system when a stack overflow is noticed
+    Description:
+       Stack overflow handler -- Shut down all interrupts, send serious complaint
+        to command port.
+    Arguments:
+       pxTask - pointer to task handle
+       pcTaskName - pointer to task name
+    Results:
+       <none>
+    Notes:
+       This routine will never return.
+       This routine is referenced in the task.c file of FreeRTOS as an extern.
+    \*---------------------------------------------------------------------------*/
+
+    uint8_t* pC;
+    uint16_t baud;
+
+    extern uint8_t * LineBuffer;    // line buffer on heap (with pvPortMalloc).
+
+    /* shut down all interrupts */
+    portDISABLE_INTERRUPTS();
+
+
+    /* take over the command line buffer to generate our error message */
+    pC = (uint8_t*) LineBuffer;
+
+    strcat_P( (char*) pC, PSTR("\r\n"));
+    strcat( (char*) pC, (char*) pcTaskName );
+    strcat_P( (char*) pC, PSTR("\r\n"));
+
+    pC = (uint8_t*) LineBuffer;
+
+    /* Force the UART control register to be the way we want, just in case */
+
+    UCSR0C = ( _BV( UCSZ01 ) | _BV( UCSZ00 ) );     // 8 data bits
+    UCSR0B = _BV( TXEN0 );                          // only enable transmit
+    UCSR0A = 0;
+
+    /* Calculate the baud rate register value from the equation in the
+    * data sheet.  This calculation rounds to the nearest factor, which
+    * means the resulting rate may be either faster or slower than the
+    * desired rate (the old calculation was always faster).
+    *
+    * If the system clock is one of the Magic Frequencies, this
+    * computation will result in the exact baud rate
+    */
+    baud = ( ( ( configCPU_CLOCK_HZ / ( ( 16UL * 38400 ) / 2UL ) ) + 1UL ) / 2UL ) - 1UL;
+    UBRR0 = baud;
+
+    /* Send out the message, without interrupts.  Hard wired to USART 0 */
+    while ( *pC )
+    {
+        while (!(UCSR0A & (1 << UDRE0)));
+        UDR0 = *pC;
+        pC++;
+    }
+
+    while(1){ PINB |= _BV(PINB7); _delay_ms(100); } // main (red PB7) LED flash and die.
+}
+
 #endif /* configCHECK_FOR_STACK_OVERFLOW >= 1 */
 /*-----------------------------------------------------------*/
 
 #if ( configSUPPORT_STATIC_ALLOCATION >= 1 )
 
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer,
-                                    StackType_t **ppxIdleTaskStackBuffer,
-                                    configSTACK_DEPTH_TYPE *pulIdleTaskStackSize ) __attribute__((weak));
+void vApplicationGetIdleTaskMemory( StaticTask_t ** ppxIdleTaskTCBBuffer,
+                                    StackType_t ** ppxIdleTaskStackBuffer,
+                                    configSTACK_DEPTH_TYPE * pulIdleTaskStackSize ) __attribute__((weak));
 
-void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer,
-                                    StackType_t **ppxIdleTaskStackBuffer,
-                                    configSTACK_DEPTH_TYPE *pulIdleTaskStackSize )
+void vApplicationGetIdleTaskMemory( StaticTask_t ** ppxIdleTaskTCBBuffer,
+                                    StackType_t ** ppxIdleTaskStackBuffer,
+                                    configSTACK_DEPTH_TYPE * pulIdleTaskStackSize )
 {
     static StaticTask_t xIdleTaskTCB;
     static StackType_t uxIdleTaskStack[ configMINIMAL_STACK_SIZE ];
@@ -255,13 +326,13 @@ void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer,
 
 #if ( configUSE_TIMERS >= 1 )
 
-void vApplicationGetTimerTaskMemory( StaticTask_t **ppxTimerTaskTCBBuffer,
-                                     StackType_t **ppxTimerTaskStackBuffer,
-                                     configSTACK_DEPTH_TYPE *pulTimerTaskStackSize ) __attribute__((weak));
+void vApplicationGetTimerTaskMemory( StaticTask_t ** ppxTimerTaskTCBBuffer,
+                                     StackType_t ** ppxTimerTaskStackBuffer,
+                                     configSTACK_DEPTH_TYPE * pulTimerTaskStackSize ) __attribute__((weak));
 
-void vApplicationGetTimerTaskMemory( StaticTask_t **ppxTimerTaskTCBBuffer,
-                                     StackType_t **ppxTimerTaskStackBuffer,
-                                     configSTACK_DEPTH_TYPE *pulTimerTaskStackSize )
+void vApplicationGetTimerTaskMemory( StaticTask_t ** ppxTimerTaskTCBBuffer,
+                                     StackType_t ** ppxTimerTaskStackBuffer,
+                                     configSTACK_DEPTH_TYPE * pulTimerTaskStackSize )
 {
     static StaticTask_t xTimerTaskTCB;
     static StackType_t uxTimerTaskStack[ configTIMER_TASK_STACK_DEPTH ];
