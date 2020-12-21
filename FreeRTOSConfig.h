@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Kernel V10.4.1
+ * FreeRTOS Kernel V10.4.3
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -52,20 +52,24 @@
 #define configUSE_TICK_HOOK                 0
 #define configCPU_CLOCK_HZ                  ( ( uint32_t ) F_CPU )          // This F_CPU variable set by the environment
 #define configMAX_PRIORITIES                4
+#define configIDLE_SHOULD_YIELD             1
 #define configMINIMAL_STACK_SIZE            ( 85 )
 #define configMAX_TASK_NAME_LEN             ( 8 )
+
+#define configASSERT
+
+#define configQUEUE_REGISTRY_SIZE           0
+#define configCHECK_FOR_STACK_OVERFLOW      0
+
 #define configUSE_TRACE_FACILITY            0
 #define configUSE_16_BIT_TICKS              1
-#define configIDLE_SHOULD_YIELD             1
 
 #define configUSE_MUTEXES                   1
 #define configUSE_RECURSIVE_MUTEXES         1
 #define configUSE_COUNTING_SEMAPHORES       1
-#define configUSE_QUEUE_SETS                0
-#define configQUEUE_REGISTRY_SIZE           0
 #define configUSE_TIME_SLICING              1
-#define configCHECK_FOR_STACK_OVERFLOW      1
-#define configUSE_MALLOC_FAILED_HOOK        1
+#define configUSE_QUEUE_SETS                0
+#define configUSE_MALLOC_FAILED_HOOK        0
 
 #define configSUPPORT_DYNAMIC_ALLOCATION    1
 #define configSUPPORT_STATIC_ALLOCATION     0
@@ -74,7 +78,7 @@
 #define configUSE_TIMERS                    1
 #define configTIMER_TASK_PRIORITY           ( ( UBaseType_t ) 3 )
 #define configTIMER_QUEUE_LENGTH            ( ( UBaseType_t ) 10 )
-#define configTIMER_TASK_STACK_DEPTH        ( 85 )
+#define configTIMER_TASK_STACK_DEPTH        configMINIMAL_STACK_SIZE
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES               0
