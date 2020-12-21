@@ -345,3 +345,4 @@ void vApplicationGetTimerTaskMemory( StaticTask_t ** ppxTimerTaskTCBBuffer,
 #endif /* configUSE_TIMERS >= 1 */
 
 #endif /* configSUPPORT_STATIC_ALLOCATION >= 1 */
+
