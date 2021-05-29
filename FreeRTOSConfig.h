@@ -1,6 +1,8 @@
 /*
- * FreeRTOS Kernel V10.4.3
- * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * FreeRTOS Kernel V10.4.4
+ * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ *
+ * SPDX-License-Identifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -78,10 +80,6 @@
 #define configTIMER_QUEUE_LENGTH            ( ( UBaseType_t ) 10 )
 #define configTIMER_TASK_STACK_DEPTH        configMINIMAL_STACK_SIZE
 
-/* Co-routine definitions. */
-#define configUSE_CO_ROUTINES               0
-#define configMAX_CO_ROUTINE_PRIORITIES     ( (UBaseType_t ) 2 )
-
 /* Set the stack depth type to be uint16_t. */
 #define configSTACK_DEPTH_TYPE              uint16_t
 
@@ -106,6 +104,28 @@ to exclude the API function. */
 
 #define configMAX(a,b)  ({ __typeof__ (a) _a = (a); __typeof__ (b) _b = (b); _a > _b ? _a : _b; })
 #define configMIN(a,b)  ({ __typeof__ (a) _a = (a); __typeof__ (b) _b = (b); _a < _b ? _a : _b; })
+
+/**
+ * configASSERT macro: https://www.freertos.org/a00110.html#configASSERT
+ */
+#ifndef configASSERT
+    #define configDEFAULT_ASSERT 0
+#else
+    /**
+     * Enable configASSERT macro if it is defined.
+     */
+    #ifndef configDEFAULT_ASSERT
+        #define configDEFAULT_ASSERT 1
+    #endif
+
+    /**
+     * Define a hook method for configASSERT macro if configASSERT is enabled.
+     */
+    #if configDEFAULT_ASSERT == 1
+        extern void vApplicationAssertHook();
+        #define configASSERT( x ) if (( x ) == 0) { vApplicationAssertHook(); }
+    #endif
+#endif
 
 
 #endif /* FREERTOS_CONFIG_H */

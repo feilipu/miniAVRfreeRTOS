@@ -1,6 +1,8 @@
 /*
- * FreeRTOS Kernel V10.4.3
- * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * FreeRTOS Kernel V10.4.4
+ * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ *
+ * SPDX-License-Identifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -28,8 +30,8 @@
 #ifndef TIMERS_H
 #define TIMERS_H
 
-#ifndef INC_FREERTOS_H
-    #error "include FreeRTOS.h must appear in source files before include timers.h"
+#ifndef INC_ARDUINO_FREERTOS_H
+    #error "include Arduino_FreeRTOS.h must appear in source files before include timers.h"
 #endif
 
 /*lint -save -e537 This headers are only multiply included if the application code
@@ -1329,10 +1331,10 @@ BaseType_t xTimerGenericCommand( TimerHandle_t xTimer,
     /**
      * task.h
      * <pre>void vApplicationGetTimerTaskMemory( StaticTask_t ** ppxTimerTaskTCBBuffer, StackType_t ** ppxTimerTaskStackBuffer, configSTACK_DEPTH_TYPE * pulTimerTaskStackSize ) </pre>
-     * 
-     * This function is used to provide a statically allocated block of memory to FreeRTOS to hold the Timer Task TCB.  This function is required when 
+     *
+     * This function is used to provide a statically allocated block of memory to FreeRTOS to hold the Timer Task TCB.  This function is required when
      * configSUPPORT_STATIC_ALLOCATION is set.  For more information see this URI: https://www.FreeRTOS.org/a00110.html#configSUPPORT_STATIC_ALLOCATION
-     * 
+     *
      * @param ppxTimerTaskTCBBuffer   A handle to a statically allocated TCB buffer
      * @param ppxTimerTaskStackBuffer A handle to a statically allocated Stack buffer for thie idle task
      * @param pulTimerTaskStackSize   A pointer to the number of elements that will fit in the allocated stack buffer
