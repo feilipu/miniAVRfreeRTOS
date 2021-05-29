@@ -257,7 +257,7 @@ typedef enum
  * BaseType_t xTaskCreate(
  *                            TaskFunction_t pxTaskCode,
  *                            const char * const pcName,
- *                            configSTACK_DEPTH_TYPE usStackDepth,
+ *                            const configSTACK_DEPTH_TYPE usStackDepth,
  *                            void *pvParameters,
  *                            UBaseType_t uxPriority,
  *                            TaskHandle_t *pxCreatedTask
