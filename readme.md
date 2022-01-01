@@ -14,6 +14,9 @@ Ths idea was launched as a [Pozible campaign in 2013](https://www.pozible.com/go
 It was successfully funded and the [Goldilocks](https://freetronics.com/goldilocks/) was developed and supported by Freetronics. 
 
 The main repo has been hosted on [Sourceforge avrfreertos](https://sourceforge.net/projects/avrfreertos/) since 2011, and has been [downloaded over 25,000 times](https://sourceforge.net/projects/avrfreertos/files/stats/timeline?dates=2011-09-22+to+2017-11-30).
+
+Over the past few years freeRTOS development has become increasingly 32-bit orientated, with little change or improvement for the 8-bit world. As such I'm treating this 1st January 2022 10.4.6 snapshot as my LTS release.
+
 Going forward Sourceforge will be updated less often and only with major releases.
 
 Please [follow @_feilipu](https://twitter.com/_feilipu) on Twitter.
@@ -35,7 +38,7 @@ FreeRTOS has a multitude of configuration options, which can be specified from w
 
 The AVR Watchdog Timer is configured to generate 30ms time slices, but Tasks that finish before their allocated time will hand execution back to the Scheduler.
 Time slices can be selected from 15ms up to 500ms. Slower time slicing can allow the Arduino MCU to sleep for longer, without the complexity of a Tickless idle.
-							
+
 Note that Timer resolution is affected by integer math division and the time slice selected. Trying to measure 100ms accurately, using a 60ms time slice for example, won't work.
 
 Watchdog period options:
@@ -45,6 +48,8 @@ Watchdog period options:
 * WDTO_120MS
 * WDTO_250MS
 * WDTO_500MS
+
+The 8-bit AVR Timer0 has been added as an option for the experienced user. Please examine the source code to figure out how to use it.
 
 There are [multiple options for configuring the heap in freeRTOS](https://www.freertos.org/a00111.html). Please read the freeRTOS descriptions for the appropriate solution relevant to the application.
 Heap 3 has been implemented for this repository.
