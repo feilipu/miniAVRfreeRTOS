@@ -44,7 +44,7 @@
 /* Start tasks with interrupts enabled. */
 #define portFLAGS_INT_ENABLED           ( (StackType_t) 0x80 )
 
-#if defined( portUSE_WDTO)
+#if defined( portUSE_WDTO )
     #warning "Watchdog Timer used for scheduler."
     #define portSCHEDULER_ISR           WDT_vect
 
@@ -91,7 +91,7 @@ extern volatile TCB_t * volatile pxCurrentTCB;
     Updated to match avr-libc 2.0.0
 */
 
-#if defined( portUSE_WDTO)
+#if defined( portUSE_WDTO )
 
 static __inline__
 __attribute__ ((__always_inline__))
@@ -157,7 +157,7 @@ void wdt_interrupt_enable (const uint8_t value)
     Updated to match avr-libc 2.0.0
 */
 
-#if defined( portUSE_WDTO)
+#if defined( portUSE_WDTO )
 
 static __inline__
 __attribute__ ((__always_inline__))
@@ -623,7 +623,7 @@ BaseType_t xPortStartScheduler( void )
 
 void vPortEndScheduler( void )
 {
-	/* It is unlikely that the ATmega port will get stopped.  If required simply
+    /* It is unlikely that the ATmega port will get stopped.  If required simply
      * disable the tick interrupt here. */
 
     wdt_disable();      /* disable Watchdog Timer */
@@ -634,7 +634,7 @@ void vPortEndScheduler( void )
  * Manual context switch. The first thing we do is save the registers so we
  * can use a naked attribute.
  */
-void vPortYield( void ) __attribute__ ( ( hot, flatten, naked ) );
+void vPortYield( void ) __attribute__ ((hot, flatten, naked));
 void vPortYield( void )
 {
     portSAVE_CONTEXT();
@@ -649,8 +649,8 @@ void vPortYield( void )
  * Manual context switch callable from ISRs. The first thing we do is save
  * the registers so we can use a naked attribute.
  */
-void vPortYieldFromISR(void) __attribute__ ( ( hot, flatten, naked ) );
-void vPortYieldFromISR(void)
+void vPortYieldFromISR( void ) __attribute__ ((hot, flatten, naked));
+void vPortYieldFromISR( void )
 {
     portSAVE_CONTEXT();
     vTaskSwitchContext();
@@ -666,7 +666,7 @@ void vPortYieldFromISR(void)
  * difference from vPortYield() is the tick count is incremented as the
  * call comes from the tick ISR.
  */
-void vPortYieldFromTick( void ) __attribute__ ( ( hot, flatten, naked ) );
+void vPortYieldFromTick( void ) __attribute__ ((hot, flatten, naked));
 void vPortYieldFromTick( void )
 {
     portSAVE_CONTEXT();
@@ -681,7 +681,7 @@ void vPortYieldFromTick( void )
 }
 /*-----------------------------------------------------------*/
 
-#if defined(portUSE_WDTO)
+#if defined( portUSE_WDTO )
 /*
  * Setup WDT to generate a tick interrupt.
  */
@@ -694,7 +694,7 @@ void prvSetupTimerInterrupt( void )
     wdt_interrupt_enable( portUSE_WDTO );
 }
 
-#elif defined (portUSE_TIMER0)
+#elif defined( portUSE_TIMER0 )
 /*
  * Setup Timer0 compare match A to generate a tick interrupt.
  */
@@ -769,3 +769,4 @@ uint8_t ucLowByte;
         xTaskIncrementTick();
     }
 #endif
+
