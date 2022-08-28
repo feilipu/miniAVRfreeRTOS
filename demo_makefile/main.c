@@ -16,8 +16,6 @@
 static void TaskBlinkLED(void *pvParameters);
 /*-----------------------------------------------------------*/
 
-/* Main program loop */
-
 int main(void)
 {
     xTaskCreate(
@@ -29,8 +27,7 @@ int main(void)
 		,  NULL );
 
 
-	vTaskStartScheduler();
-    
+	vTaskStartScheduler();    
 }
 
 /*-----------------------------------------------------------*/

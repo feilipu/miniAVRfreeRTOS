@@ -31,8 +31,8 @@ AVRDUDE_PORT = COM3
 AVRDUDE_BAUDRATE = 115200
 
 # ---------------------------------------
-# Target options
-TARGET=main.hex
+# Target file name options
+TARGET=main
 
 # ---------------------------------------
 # compiler / programmer options
@@ -63,63 +63,41 @@ INC_PATH=-I$(FREERTOS_DIR) -I./
 # ---------- MAKEFILE CODE --------------
 # ---------------------------------------
 
-AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET)
+AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 AVRDUDE_FLAGS = -p $(MCU) -b $(AVRDUDE_BAUDRATE)
 AVRDUDE_FLAGS += -P $(AVRDUDE_PORT)
 AVRDUDE_FLAGS += -c $(AVRDUDE_PROGRAMMER)
-AVRDUDE_VERBOSE = -v -v
 
-CFLAGS = -mmcu=$(MCU)
-CFLAGS += -funsigned-char -funsigned-bitfields -DDEBUG
-CFLAGS += -DF_CPU=$(F_CPU) 
-CFLAGS += $(INC_PATH)
-CFLAGS += -O2 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums
-CFLAGS += -mrelax -Wall -Wstrict-prototypes
-CFLAGS += -std=gnu11 -Wundef
-CFLAGS += -MMD -MP -MF .dep/$(@F).d
-CFLAGS += -DBMP180_API
+MCUFLAGS = -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 
-LFLAGS = -mmcu=$(MCU)
-LFLAGS += -Wl,-Map=$(MAPFILE),--cref,--gc-sections
-LFLAGS += -lm
+CFLAGS = $(MCUFLAGS)  $(INC_PATH) -c $(SOURCES)
+LFLAGS = $(MCUFLAGS) -o $(TARGET).elf *.o
 
-OBJECTS := $(addprefix  obj/,$(SOURCES:.c=.o))
-LINKED := $(addprefix obj/, $(TARGET:.hex=.elf))
-BINARY := $(addprefix obj/, $(TARGET:.hex=.bin))
-MAPFILE := $(addprefix obj/, $(TARGET:.hex=.map))
-SYMFILE := $(addprefix obj/, $(TARGET:.hex=.sym))
-LSSFILE := $(addprefix obj/, $(TARGET:.hex=.lss))
+# ---------------------------------------
+# Optimization choice
+# This will avoid not used code and guarantee proper delays
+CFLAGS += -ffunction-sections -O2
+LFLAGS += -Wl,--gc-sections
 
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS)
-	@echo "[LD]		$(TARGET)"
-	$Qavr-gcc $(LFLAGS) -o $(LINKED) $^
-	$Qavr-objcopy -O ihex -R .eeprom $(LINKED) $@
-	$Qavr-objcopy -I ihex $(TARGET) -O binary $(BINARY)
-	$Qavr-size --format=berkeley $(LINKED)
-	$Qavr-nm -n $(LINKED) > $(SYMFILE)
-	$Qavr-objdump -h -S $(LINKED) > $(LSSFILE)
+$(TARGET):
+	$(CC) $(CFLAGS)
+	$(CC) $(LFLAGS)
+	avr-objcopy -O ihex $(TARGET).elf $(TARGET).hex
 
-obj/%.o: %.c
-	@echo "[CC]		$(notdir $<)"
-	$Qmkdir -p $(dir $@)
-	$Q$(CC) $(CFLAGS) -c -o $@ $<
-
-program: $(TARGET)
+program:
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
 
 clean:
 	@echo "Cleaning $(TARGET)"
-	$Qrm -f $(TARGET)
-	$Qrm -f $(BINARY)
-	$Qrm -f $(MAPFILE)
-	$Qrm -f $(SYMFILE)
-	$Qrm -f $(LSSFILE)
+	rm -f $(BINARY)
+	rm -f $(MAPFILE)
+	rm -f $(SYMFILE)
+	rm -f $(LSSFILE)
 	@echo "Cleaning Objects"
-	$Qrm -f *.o
-	$Qrm -f $(TARGET)*.hex
-	$Qrm -rf obj
-	$Qrm -rf .dep
-
--include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
+	rm -f *.o
+	rm -f $(TARGET)*.hex
+	rm -f $(TARGET)*.elf
+	rm -rf obj
+	rm -rf .dep
