@@ -1,5 +1,5 @@
 /*
- * FreeRTOS Kernel V10.4.6
+ * FreeRTOS Kernel V10.5.0
  * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * SPDX-License-Identifier: MIT
@@ -50,7 +50,9 @@
 
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
-#if( configSUPPORT_DYNAMIC_ALLOCATION > 0 )
+#if ( configSUPPORT_DYNAMIC_ALLOCATION == 0 )
+    #error This file must not be used if configSUPPORT_DYNAMIC_ALLOCATION is 0
+#endif
 
 /*-----------------------------------------------------------*/
 
@@ -90,5 +92,3 @@ void vPortFree( void * pv )
         ( void ) xTaskResumeAll();
     }
 }
-
-#endif /* ( configSUPPORT_DYNAMIC_ALLOCATION > 0 ) */
