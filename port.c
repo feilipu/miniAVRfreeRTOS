@@ -45,25 +45,10 @@
 #define portFLAGS_INT_ENABLED           ( (StackType_t) 0x80 )
 
 #if defined( portUSE_WDTO )
-    #warning "Watchdog Timer used for scheduler."
     #define portSCHEDULER_ISR           WDT_vect
 
-#elif defined( portUSE_TIMER0 )
-/* Hardware constants for Timer0. */
-    #warning "Timer0 used for scheduler."
-    #define portSCHEDULER_ISR           TIMER0_COMPA_vect
-    #define portCLEAR_COUNTER_ON_MATCH  ( (uint8_t) _BV(WGM01) )
-    #define portPRESCALE_1024           ( (uint8_t) (_BV(CS02)|_BV(CS00)) )
-    #define portCLOCK_PRESCALER         ( (uint32_t) 1024 )
-    #define portCOMPARE_MATCH_A_INTERRUPT_ENABLE    ( (uint8_t) _BV(OCIE0A) )
-    #define portOCRL                    OCR0A
-    #define portTCCRa                   TCCR0A
-    #define portTCCRb                   TCCR0B
-    #define portTIMSK                   TIMSK0
-    #define portTIFR                    TIFR0
-
 #else
-    #error "No Timer defined for scheduler."
+    #warning "The user must define a Timer to be used for the Scheduler."
 #endif
 
 /*-----------------------------------------------------------*/
@@ -199,6 +184,13 @@ void wdt_interrupt_reset_enable (const uint8_t value)
     }
 }
 #endif
+
+/*-----------------------------------------------------------*/
+/* actual number of ticks per second, after configuration. Not for RTC, which has 1 tick/second. */
+TickType_t portTickRateHz;
+
+/* remaining ticks in each second, decremented to enable the system_tick. Not for RTC, which has 1 tick/second. */
+volatile TickType_t ticksRemainingInSec;
 
 /*-----------------------------------------------------------*/
 
@@ -521,7 +513,7 @@ void wdt_interrupt_reset_enable (const uint8_t value)
 /*
  * Perform hardware setup to enable ticks from relevant Timer.
  */
-static void prvSetupTimerInterrupt( void );
+void prvSetupTimerInterrupt( void );
 /*-----------------------------------------------------------*/
 
 /*
@@ -694,42 +686,9 @@ void prvSetupTimerInterrupt( void )
     wdt_interrupt_enable( portUSE_WDTO );
 }
 
-#elif defined( portUSE_TIMER0 )
-/*
- * Setup Timer0 compare match A to generate a tick interrupt.
- */
-static void prvSetupTimerInterrupt( void )
-{
-uint32_t ulCompareMatch;
-uint8_t ucLowByte;
-
-    /* Using 8bit Timer0 to generate the tick. Correct fuses must be
-    selected for the configCPU_CLOCK_HZ clock.*/
-
-    ulCompareMatch = configCPU_CLOCK_HZ / configTICK_RATE_HZ;
-
-    /* We only have 8 bits so have to scale 1024 to get our required tick rate. */
-    ulCompareMatch /= portCLOCK_PRESCALER;
-
-    /* Adjust for correct value. */
-    ulCompareMatch -= ( uint32_t ) 1;
-
-    /* Setup compare match value for compare match A. Interrupts are disabled
-    before this is called so we need not worry here. */
-    ucLowByte = ( uint8_t ) ( ulCompareMatch & ( uint32_t ) 0xff );
-    portOCRL = ucLowByte;
-
-    /* Setup clock source and compare match behaviour. */
-    portTCCRa = portCLEAR_COUNTER_ON_MATCH;
-    portTCCRb = portPRESCALE_1024;
-
-
-    /* Enable the interrupt - this is okay as interrupt are currently globally disabled. */
-    ucLowByte = portTIMSK;
-    ucLowByte |= portCOMPARE_MATCH_A_INTERRUPT_ENABLE;
-    portTIMSK = ucLowByte;
-}
-
+#else
+#warning "The user is responsible to provide function `prvSetupTimerInterrupt()`"
+extern void prvSetupTimerInterrupt( void );
 #endif
 
 /*-----------------------------------------------------------*/
@@ -769,4 +728,3 @@ uint8_t ucLowByte;
         xTaskIncrementTick();
     }
 #endif
-
