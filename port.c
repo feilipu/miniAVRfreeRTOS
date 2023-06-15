@@ -703,9 +703,12 @@ extern void prvSetupTimerInterrupt( void );
      * use ISR_NOBLOCK where there is an important timer running, that should preempt the scheduler.
      *
      */
-    ISR(portSCHEDULER_ISR, ISR_NAKED) __attribute__ ((hot, flatten));
-/*  ISR(portSCHEDULER_ISR, ISR_NAKED ISR_NOBLOCK) __attribute__ ((hot, flatten));
- */
+    # if configUSE_PREEMPTION_NOBLOCK == 1
+        ISR(portSCHEDULER_ISR, ISR_NAKED ISR_NOBLOCK) __attribute__ ((hot, flatten));
+    # else
+        ISR(portSCHEDULER_ISR, ISR_NAKED) __attribute__ ((hot, flatten));
+    #endif
+
     ISR(portSCHEDULER_ISR)
     {
         vPortYieldFromTick();
