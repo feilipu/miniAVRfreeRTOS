@@ -13,7 +13,7 @@ The first [Goldilocks 1284p story is here](https://feilipu.me/2013/03/08/goldilo
 Ths idea was launched as a [Pozible campaign in 2013](https://www.pozible.com/goldilocks/).
 It was successfully funded and the [Goldilocks](https://freetronics.com/goldilocks/) was developed and supported by Freetronics. 
 
-The main repo has been hosted on [Sourceforge avrfreertos](https://sourceforge.net/projects/avrfreertos/) since 2011, and has been [downloaded over 25,000 times](https://sourceforge.net/projects/avrfreertos/files/stats/timeline?dates=2011-09-22+to+2017-11-30).
+The main repo has been hosted on [Sourceforge avrfreertos](https://sourceforge.net/projects/avrfreertos/) since 2011, and has been [downloaded over 35,000 times](https://sourceforge.net/projects/avrfreertos/files/stats/timeline?dates=2011-09-22+to+2022-12-31).
 
 Over the past few years freeRTOS development has become increasingly 32-bit orientated, with little change or improvement for the 8-bit world. As such I'm treating this 16th September 2022 10.5.0 release as my LTS release.
 
