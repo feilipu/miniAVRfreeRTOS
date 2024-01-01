@@ -1,7 +1,6 @@
 # Description
 
-AVR ATmega port of freeRTOS
-A port of freeRTOS configured to use the Watchdog Timer on AVR ATmega devices and will operate with almost any classic Arduino device from Arduino, SeeedStudio, Sparkfun, Freetronics or Pololu.
+AVR ATmega port of freeRTOS. A port of freeRTOS configured to use the Watchdog Timer on AVR ATmega devices and will operate with almost any classic Arduino device from Arduino, SeeedStudio, Sparkfun, Freetronics or Pololu.
 
 The [Goldilocks Analogue story of adding a dual channel DAC to a 1284p classic Arduino board is told here](https://feilipu.me/?s=Goldilocks+Analogue).
 The [Goldilocks Analogue - Kickstarter Campaign](https://www.kickstarter.com/projects/feilipu/goldilocks-analogue-classic-arduino-audio-superpow/) was successfully funded. 
@@ -15,7 +14,7 @@ It was successfully funded and the [Goldilocks](https://freetronics.com/goldiloc
 
 The main repo has been hosted on [Sourceforge avrfreertos](https://sourceforge.net/projects/avrfreertos/) since 2011, and has been [downloaded over 35,000 times](https://sourceforge.net/projects/avrfreertos/files/stats/timeline?dates=2011-09-22+to+2022-12-31).
 
-Over the past few years freeRTOS development has become increasingly 32-bit orientated, with little change or improvement for the 8-bit world. As such I'm treating this 16th September 2022 10.5.0 release as my LTS release.
+Over the past few years freeRTOS development has become increasingly 32-bit orientated, with little change or improvement for the 8-bit world. As such I'm treating this 1 January 2024 v11.0.1 release as my LTS release.
 
 Going forward Sourceforge will be updated less often and only with major releases.
 
@@ -48,8 +47,6 @@ Watchdog period options:
 * WDTO_120MS
 * WDTO_250MS
 * WDTO_500MS
-
-The 8-bit AVR Timer0 has been added as an option for the experienced user. Please examine the source code to figure out how to use it.
 
 There are [multiple options for configuring the heap in freeRTOS](https://www.freertos.org/a00111.html). Please read the freeRTOS descriptions for the appropriate solution relevant to the application.
 Heap 3 has been implemented for this repository.
