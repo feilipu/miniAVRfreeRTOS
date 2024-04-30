@@ -14,7 +14,7 @@ It was successfully funded and the [Goldilocks](https://freetronics.com/goldiloc
 
 The main repo has been hosted on [Sourceforge avrfreertos](https://sourceforge.net/projects/avrfreertos/) since 2011, and has been [downloaded over 35,000 times](https://sourceforge.net/projects/avrfreertos/files/stats/timeline?dates=2011-09-22+to+2022-12-31).
 
-Over the past few years freeRTOS development has become increasingly 32-bit orientated, with little change or improvement for the 8-bit world. As such I'm treating this 1 January 2024 v11.0.1 release as my LTS release.
+Over the past few years freeRTOS development has become increasingly 32-bit orientated, with little change or improvement for the 8-bit world. As such I'm treating this 22nd April 2024 v11.1.0 release as my LTS release.
 
 Going forward Sourceforge will be updated less often and only with major releases.
 
