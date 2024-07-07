@@ -40,12 +40,12 @@
 #ifndef freeRTOSBoardDefs_h
 #define freeRTOSBoardDefs_h
 
+#include <avr/io.h>
+#include <avr/wdt.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <avr/io.h>
-#include <avr/wdt.h>
 
 // System Tick - Scheduler timer
 // Use the Watchdog timer, and choose the rate at which scheduler interrupts will occur.
