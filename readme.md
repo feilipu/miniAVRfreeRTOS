@@ -23,7 +23,7 @@ Please [follow @_feilipu](https://twitter.com/_feilipu) on Twitter.
 # Getting Started
 
 To get started, follow the instructions on [freeRTOS & libraries for AVR ATmega](https://feilipu.me/freertos-and-libraries-for-avr-atmega).
-Then do some further reading on the [freeRTOS Quick Start Guide](https://www.freertos.org/FreeRTOS-quick-start-guide.html).
+Then do some further reading on the [freeRTOS Beginner's Guide](https://www.freertos.org/Documentation/01-FreeRTOS-quick-start/01-Beginners-guide/00-Overview).
 
 For the Arduino platform there is a [freeRTOS Library](https://github.com/feilipu/Arduino_FreeRTOS_Library)
 available in the Arduino IDE Library manager, or by directly downloading the ZIP file and importing it into your Arduino IDE.
