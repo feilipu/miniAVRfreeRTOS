@@ -35,7 +35,7 @@ Generally, I use the freeRTOS scheduler for loose timing (15ms) and hardware tim
 
 FreeRTOS has a multitude of configuration options, which can be specified from within the FreeRTOSConfig.h file., but some sensible defaults have been selected.
 
-The AVR Watchdog Timer is configured to generate 30ms time slices, but Tasks that finish before their allocated time will hand execution back to the Scheduler.
+The AVR Watchdog Timer is configured to generate 15ms time slices, but Tasks that finish before their allocated time will hand execution back to the Scheduler.
 Time slices can be selected from 15ms up to 500ms. Slower time slicing can allow the Arduino MCU to sleep for longer, without the complexity of a Tickless idle.
 
 Note that Timer resolution is affected by integer math division and the time slice selected. Trying to measure 100ms accurately, using a 60ms time slice for example, won't work.
